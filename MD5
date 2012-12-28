@@ -1,0 +1,17 @@
+b42091754bcc96f7d0161616934fd872 *DESCRIPTION
+fa5cf72b653e6df4a4e39f9bcd46e816 *NAMESPACE
+b9f7cdbaafee7d2a4bc322e6242993ba *R/BoundaryClump.R
+30be0016b765597a7dccbc50ed17ec0f *R/Coherence.R
+39dff4de115d8a76b653b56128f06804 *R/OrderMatrix.R
+a3c2507a82c5f70822253c0721f4435d *R/Turnover.R
+5580313c79d057c604c42ac34a16c825 *R/metacommunity.R
+104d33a021a3632c31ab01a0713a5b21 *R/nullmaker.R
+0037737abc14bb7c953e49a6f0274ffd *data/testmatrices.rda
+55ed6d0bcbf49b1f9e71a76f90737d91 *man/BoundaryClump.Rd
+9b6be2cd8ca59d34a4760dab9ecc7035 *man/Coherence.Rd
+a09f250f96ca61fb320cc15686c22427 *man/OrderMatrix.Rd
+df006d78ad2070971faa5c27ced885be *man/Turnover.Rd
+738fda430c6ca394b59b3d285f19efba *man/metacom-package.Rd
+78a688991db40b98025a6f2b220903f8 *man/metacommunity.Rd
+b4814661b4ea566dfe09ab0130385597 *man/nullmaker.Rd
+0e99f72420ff0e19dfed880adde9aad7 *man/testmatrices.Rd
