@@ -1,7 +1,5 @@
-Turnover <-function(matrix ,method="r1" ,sims=1000 ,scores=1, order=TRUE, allow.empty=FALSE){
-	require(vegan)
-
-if(order==TRUE){matrix=OrderMatrix(matrix,scores=scores)}
+Turnover <-function(comm ,method="r1" ,sims=1000 ,scores=1, order=TRUE, allow.empty=FALSE){
+if(order==TRUE){comm=OrderMatrix(comm,scores=scores)}
 
 turnover=function(web){
    	for(i in 1:dim(web)[1]){
@@ -25,8 +23,8 @@ turnover=function(web){
     return(sum(D))
 }
 
-	statistic=turnover(matrix)
-	nulls=nullmaker(matrix=matrix, sims=sims, method=method,allow.empty=allow.empty)
+	statistic=turnover(comm)
+	nulls=nullmaker(comm=comm, sims=sims, method=method,allow.empty=allow.empty)
 	simstat=as.numeric(lapply(nulls,turnover))
 	varstat=sd(simstat)
 	z = (mean(simstat)-statistic)/(varstat)

@@ -9,15 +9,16 @@ This function determines the number of embedded absences in an interaction matri
 }
 
 \usage{
-Coherence(matrix, method = "r1", sims = 1000, scores = 1, order=TRUE, allow.empty=FALSE)
+Coherence(comm, method = "r1", sims = 1000, scores = 1, 
+order=TRUE, allow.empty=FALSE)
 }
 
 \arguments{
-  \item{matrix}{
+  \item{comm}{
 community data in the form of a presence absence matrix
 }
   \item{method}{
-null model randomization method used by 'nullmaker'. See details. 
+null model randomization method used by 'nullmaker'. See details below (and the help file of fucntion 'nullmaker') for more information. 
 }
   \item{sims}{
 number of simulated null matrices to use in analysis
@@ -37,7 +38,7 @@ logical argument indicating whether to allow null matrices to have empty rows or
 
 
 \details{
-Method is an argument handed to functions in the 'vegan' package. Leibold & Mikkelson advocated the use of equiprobable rows and columns (provided that rows and columns had at least one entry). This method is called 'r00'. Methods maintaining row (site) frequencies include 'r0','r1' & 'r2'. The default method argument is 'r1', which maintains the species richness of a site (row totals) and fills species ranges (columns) based on their marginal probabilities. See the help file for 'commsimulator' or Wright et al. 1998 for more information. 
+'method' is an argument handed to functions in the 'vegan' package. Leibold & Mikkelson advocated the use of equiprobable rows and columns (provided that rows and columns had at least one entry). This method is called 'r00'. Methods maintaining row (site) frequencies include 'r0','r1' & 'r2'. The default method argument is 'r1', which maintains the species richness of a site (row totals) and fills species ranges (columns) based on their marginal probabilities. Arguably the most conservative null algorithm is the fixed row - fixed column total null, which is implemented as 'fixedfixed'. See the help file for 'commsimulator' or Wright et al. 1998 for more information. 
 
 If 'order' is FALSE, the interaction matrix is not ordinated, allowing the user to order the matrix based on site characteristics or other biologically relevant characteristics.
 
@@ -79,7 +80,7 @@ intmat=testmatrices[[2]]
 #determine coherence of interaction matrix
 coh.intmat=Coherence(intmat, method='r1', sims=1000, scores=1, order=TRUE)
 
-#return results in list form
+#return results 
 coh.intmat
 }
 

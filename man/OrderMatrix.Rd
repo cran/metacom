@@ -11,25 +11,28 @@ Ordinates interaction matrix
 
 
 \usage{
-OrderMatrix(matrix, scores = 1)
+OrderMatrix(comm, scores = 1, output.scores=FALSE)
 }
 
 
 
 
 \arguments{
-  \item{matrix}{
+  \item{comm}{
 community data in the form of a presence absence matrix
 }
   \item{scores}{
 axis scores to ordinate matrix. 1: primary axis scores (default) 2: secondary axis scores
+}
+	\item{output.scores}{
+logical. Default is to return the ordinated matrix. If 'output.scores' is TRUE, the function returns the site and species scores.
 }
 }
 
 
 
 \value{
-An ordinated matrix is returned. This function is already contained within functions calculating coherence, species turnover & boundary clumping, but may be useful for visualizations. 
+'OrderMatrix' returns either an ordinated matrix (output.scores = FALSE) or the site and species scores (output.scores = TRUE) obtained from reciprocal averaging. This function is already contained within functions calculating coherence, species turnover & boundary clumping, but may be useful for visualizations or for hypothesis testing concerning the important variables associated with the site or species scores.  
 }
 
 
@@ -58,10 +61,12 @@ Tad Dallas
 data(testmatrices)
 pres3c=testmatrices[[6]]
 
+#obtain an ordinated interaction matrix
+OrderMatrix(pres3c, scores = 1, output.scores = FALSE)
 
-#rotate the matrix 90 degrees right and plot
-image(apply(pres3c,2,rev), col=c(0,'dodgerblue3'), axes=FALSE, xlab='species', ylab='sites', cex.lab=1.4)
-  box(lwd=2,col=1)
+#obtain site and species scores from reciprocal averaging
+OrderMatrix(pres3c, scores = 1, output.scores = TRUE)
+
 }
 
 

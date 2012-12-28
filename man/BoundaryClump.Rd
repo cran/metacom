@@ -19,12 +19,12 @@ The default is the range perspective, meaning that the analyses of boundary clum
 
 
 \usage{
-BoundaryClump(matrix, order=TRUE, scores=1)
+BoundaryClump(comm, order=TRUE, scores=1)
 }
 
 
 \arguments{
-  \item{matrix}{
+  \item{comm}{
 		community data in the form of a presence absence matrix
 }
 		\item{order}{

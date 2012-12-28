@@ -12,13 +12,14 @@ Analysis of the Elements of Metacommunity Structure
 }
 
 \usage{
-metacommunity(matrix, scores=1, method = "r1", sims = 1000, order=TRUE, allow.empty=FALSE)
+metacommunity(comm, scores=1, method = "r1", sims = 1000, 
+order=TRUE, allow.empty=FALSE)
 }
 
 
 
 \arguments{
-  \item{matrix}{
+  \item{comm}{
 community data in the form of a presence absence matrix
 }
  
@@ -46,7 +47,7 @@ logical argument indicating whether to allow null matrices to have empty rows or
 
 
 \details{
-Method is an argument handed to functions in the 'vegan' package. Leibold & Mikkelson advocated the use of equiprobable rows and columns (provided that rows and columns had at least one entry). This method is called 'r00'. Methods maintaining row (site) frequencies include 'r0','r1' & 'r2'. The default method argument is 'r1', which maintains the species richness of a site (row totals) and fills species ranges (columns) based on their marginal probabilities. See the help file for 'commsimulator' or Wright et al. 1998 for more information. 
+'method' is an argument handed to functions in the 'vegan' package. Leibold & Mikkelson advocated the use of equiprobable rows and columns (provided that rows and columns had at least one entry). This method is called 'r00'. Methods maintaining row (site) frequencies include 'r0','r1' & 'r2'. The default method argument is 'r1', which maintains the species richness of a site (row totals) and fills species ranges (columns) based on their marginal probabilities. Arguably the most conservative null algorithm is the fixed row - fixed column total null, which is implemented as 'fixedfixed'. See the help file for 'commsimulator' or Wright et al. 1998 for more information. 
 
 If 'order' is FALSE, the interaction matrix is not ordinated, allowing the user to order the matrix based on site characteristics or other biologically relevant characteristics.
 
@@ -54,8 +55,9 @@ If 'order' is FALSE, the interaction matrix is not ordinated, allowing the user 
 
 \note{This function may take awhile to finish as a result of the creation of null matrices. If you are running multiple interaction matrices, the code can be parallelized using the 'snow' package.}
 
+
 \value{
-\item{Matrix}{ordinated matrix used to calculate coherence, boundary clumping & turnover}
+\item{Comm}{ordinated matrix used to calculate coherence, boundary clumping & turnover}
 
 \item{Coherence}{output of the Coherence() function, giving information on the number of embedded absences and the significance relative to simulated null matrices}
 

@@ -1,20 +1,19 @@
-BoundaryClump <-function(matrix,order=TRUE,scores=1){
-	require(vegan)
-	if(order==TRUE){matrix=OrderMatrix(matrix,scores=scores)}
+BoundaryClump <-function(comm, order=TRUE, scores=1){
+	if(order==TRUE){comm=OrderMatrix(comm,scores=scores)}
 
-	for(i in 1:dim(matrix)[1]){
-			temp=matrix[i,]
+	for(i in 1:dim(comm)[1]){
+			temp=comm[i,]
 			first=min(which(temp==1))
 			last=max(which(temp==1))
-			matrix[i,first:last]<-1	
+			comm[i,first:last]<-1	
 		}
-	r=dim(matrix)[1]
-	c=dim(matrix)[2]
+	r=dim(comm)[1]
+	c=dim(comm)[2]
 	M=0
 	ComBnd=rep(0,c)
 	ComBndChi=0
 	for(i in 1:r){
-		ind1=which(matrix[i,]==1)
+		ind1=which(comm[i,]==1)
 		First=min(ind1)
 		Last=max(ind1)  
 		

@@ -1,5 +1,4 @@
-Coherence <-function(matrix, method='r1', sims=1000, scores=1, order=TRUE,allow.empty=FALSE){
-  require(vegan)
+Coherence <-function(comm, method='r1', sims=1000, scores=1, order=TRUE,allow.empty=FALSE){
 
 coherence <-function(web){
 	zeros=which(web==0, arr.ind=TRUE)	
@@ -36,17 +35,17 @@ return(dim(ret)[1])
 
 
 
-if(order==TRUE){matrix=OrderMatrix(matrix, scores=scores)
-}else{matrix=matrix}
+if(order==TRUE){comm=OrderMatrix(comm, scores=scores)
+}else{comm=comm}
 
-	statistic=coherence(matrix)
-	nulls=nullmaker(matrix=matrix, sims=sims, method=method, allow.empty=allow.empty)
+	statistic=coherence(comm)
+	nulls=nullmaker(comm=comm, sims=sims, method=method, allow.empty=allow.empty)
 
 	simstat=as.numeric(lapply(nulls,coherence))
 	varstat=sd(simstat)
 	z = (mean(simstat)-statistic)/(varstat)
 	pval=2*pnorm(-abs(z))
-	return(list(Coherence=statistic, z=z,pval=pval, SimulatedMean=mean(simstat), SimulatedVariance=varstat, method=method))
+	return(list(EmbAbs=statistic, z=z, pval=pval, SimulatedMean=mean(simstat), SimulatedVariance=varstat, method=method))
 }
 
 
