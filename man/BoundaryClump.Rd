@@ -11,6 +11,9 @@ Determines boundary clumping
 'BoundaryClump' calculates the Morisita's Index (Morisita 1962) for presence-absence interaction matrices, using a chi-squared test to assess significance.
 
 This statistic is not based on randomization methods, so the function only requires a presence-absence interaction matrix and two arguments regarding the ordination of the empirical matrix.
+
+The default is the range perspective, meaning that the analyses of boundary clumping and species turnover compare the distribution of species among sites. If the 'community' perspective is desired, transpose the matrix before analysis using the transpose function ('t()'). However, the author cautions against misinterpretation of the community perspective, as the biological meaning of turnover and boundary clumping differ between perspectives. 
+
 }
 
 

@@ -9,7 +9,7 @@ Creates null matrices that do not have columns or rows that are completely empty
 }
 
 \usage{
-nullmaker(matrix, sims = 1000, method = "r1")
+nullmaker(matrix, sims = 1000, method = "r1", allow.empty=FALSE)
 }
 
 \arguments{
@@ -22,6 +22,10 @@ number of simulated null matrices to use in analysis
   \item{method}{
 null model randomization method. See details.
 }
+		\item{allow.empty}{
+logical argument indicating whether to allow null matrices to have empty rows or columns
+}
+
 }
 
 \value{

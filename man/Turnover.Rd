@@ -6,12 +6,12 @@ Determines species turnover
 }
 
 \description{
-'Turnover' is a function that assesses species turnover from the community perspective. If the range perspective is desired, simply transpose the matrix before analysis using the transpose function ('t()').
+'Turnover' is a function that assesses species turnover from the range perspective. If the 'community' perspective is desired, simply transpose the matrix before analysis using the transpose function ('t()').
 }
 
 
 \usage{
-Turnover(matrix, method = "r1", sims = 1000, scores = 1, order=TRUE)
+Turnover(matrix, method = "r1", sims = 1000, scores = 1, order=TRUE, allow.empty=FALSE)
 }
 
 
@@ -35,6 +35,11 @@ axis scores to ordinate matrix. 1: primary axis scores (default) 2: secondary ax
 		\item{order}{
 logical argument indicating whether to ordinate the interaction matrix or not. See details.
 }
+
+		\item{allow.empty}{
+logical argument indicating whether to allow null matrices to have empty rows or columns
+}
+
 }
 
 

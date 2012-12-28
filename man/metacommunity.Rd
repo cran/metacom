@@ -12,7 +12,7 @@ Analysis of the Elements of Metacommunity Structure
 }
 
 \usage{
-metacommunity(matrix, scores=1, method = "r1", sims = 1000, order=TRUE)
+metacommunity(matrix, scores=1, method = "r1", sims = 1000, order=TRUE, allow.empty=FALSE)
 }
 
 
@@ -36,6 +36,12 @@ number of simulated null matrices to use in analysis
 		\item{order}{
 logical argument indicating whether to ordinate the interaction matrix or not. See details.
 }
+
+		\item{allow.empty}{
+logical argument indicating whether to allow null matrices to have empty rows or columns
+}
+
+
 }
 
 

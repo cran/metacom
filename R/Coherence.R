@@ -1,4 +1,4 @@
-Coherence <-function(matrix, method='r1', sims=1000, scores=1, order=TRUE){
+Coherence <-function(matrix, method='r1', sims=1000, scores=1, order=TRUE,allow.empty=FALSE){
   require(vegan)
 
 coherence <-function(web){
@@ -40,7 +40,8 @@ if(order==TRUE){matrix=OrderMatrix(matrix, scores=scores)
 }else{matrix=matrix}
 
 	statistic=coherence(matrix)
-	nulls=nullmaker(matrix=matrix, sims=sims, method=method)
+	nulls=nullmaker(matrix=matrix, sims=sims, method=method, allow.empty=allow.empty)
+
 	simstat=as.numeric(lapply(nulls,coherence))
 	varstat=sd(simstat)
 	z = (mean(simstat)-statistic)/(varstat)

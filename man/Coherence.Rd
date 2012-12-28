@@ -9,7 +9,7 @@ This function determines the number of embedded absences in an interaction matri
 }
 
 \usage{
-Coherence(matrix, method = "r1", sims = 1000, scores = 1, order=TRUE)
+Coherence(matrix, method = "r1", sims = 1000, scores = 1, order=TRUE, allow.empty=FALSE)
 }
 
 \arguments{
@@ -28,6 +28,10 @@ axis scores to ordinate matrix. 1: primary axis scores (default) 2: secondary ax
 
 		\item{order}{
 logical argument indicating whether to ordinate the interaction matrix or not. See details.
+}
+
+		\item{allow.empty}{
+logical argument indicating whether to allow null matrices to have empty rows or columns
 }
 }
 
