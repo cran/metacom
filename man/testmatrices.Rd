@@ -7,7 +7,7 @@ Test matrices used to evaluate metacommunity functions
 
 
 \description{
-A list of 7 test matrices from two of the foundational papers on the elements of metacommunity structure (Leibold & Mikkelson 2002 and Presley et al. 2010)
+A list of 7 test matrices from two of the foundational papers on the Elements of Metacommunity Structure analysis (Leibold & Mikkelson 2002 and Presley et al. 2010)
 }
 
 
@@ -17,7 +17,7 @@ A list of 7 test matrices from two of the foundational papers on the elements of
 \format{
 A list containing interaction matrices from Leibold & Mikkelson 2002 and Presley et al. 2010:
 
-	[[1]]  dim=(10 x 10) Leibold & Mikkelson 2002 Figure 1a
+	[[1]]  dim=(20 x 20) Randomly generated matrix (`rbinom(400,1,0.4)`)
 
 	[[2]]  dim=(10 x 10) Leibold & Mikkelson 2002 Figure 1b
 
@@ -50,8 +50,8 @@ length(TestMatrices)
 names(TestMatrices)
 
 #image plot of interaction matrix, using the Imagine() function
-lei1a=TestMatrices[[1]]
-Imagine(lei1a)
+test=TestMatrices[[6]]
+Imagine(test, fill=FALSE, ordinate=TRUE)
 
 }
 

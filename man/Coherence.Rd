@@ -10,7 +10,7 @@ This function determines the number of embedded absences in an interaction matri
 
 \usage{
 Coherence(comm, method = "r1", sims = 1000, scores = 1, 
-order=TRUE, allow.empty=FALSE)
+order=TRUE, allow.empty=FALSE, binary=TRUE, progressBar=FALSE)
 }
 
 \arguments{
@@ -34,6 +34,15 @@ logical argument indicating whether to ordinate the interaction matrix or not. S
 		\item{allow.empty}{
 logical argument indicating whether to allow null matrices to have empty rows or columns
 }
+
+ \item{binary}{
+logical argument indicating whether to ordinate the community matrix based on abundance or binary (default) data.
+}
+
+ \item{progressBar}{
+Logical. Prints a graphical progress bar that tracks the creation of null matrices. Useful for conservative null models on large and/or sparse data.
+}
+
 }
 
 
@@ -75,10 +84,10 @@ Tad Dallas
 \examples{
 #define an interaction matrix
 data(TestMatrices)
-intmat=TestMatrices[[2]]
+intmat=TestMatrices[[7]]
 
 #determine coherence of interaction matrix
-coh.intmat=Coherence(intmat, method='r1', sims=1000, scores=1, order=TRUE)
+coh.intmat=Coherence(intmat, method='r1', sims=100, scores=1, order=TRUE, binary=TRUE)
 
 #return results 
 coh.intmat

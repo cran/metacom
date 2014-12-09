@@ -14,7 +14,7 @@ If the 'community' perspective is desired, simply transpose the matrix before an
 
 \usage{
 Turnover(comm, method = "r1", sims = 1000, scores = 1, 
-order=TRUE, allow.empty=FALSE)
+order=TRUE, allow.empty=FALSE, binary=TRUE, progressBar=FALSE)
 }
 
 
@@ -43,6 +43,14 @@ logical argument indicating whether to ordinate the interaction matrix or not. S
 logical argument indicating whether to allow null matrices to have empty rows or columns
 }
 
+ \item{binary}{
+logical argument indicating whether to ordinate the community matrix based on abundance or binary (default) data.
+}
+
+ \item{progressBar}{
+Logical. Prints a graphical progress bar that tracks the creation of null matrices. Useful for conservative null models on large and/or sparse data.
+}
+
 }
 
 
@@ -69,6 +77,7 @@ This function can either be used as a standalone, or can be used through the 'me
 
 \item{method}{randomization method to create null matrices}
 
+
 }
 
 
@@ -91,10 +100,11 @@ data(TestMatrices)
 intmat=TestMatrices[[3]]
 
 #determine species turnover
-turnover.intmat=Turnover(intmat, method='r1', sims=1000, scores=1)
+turnover.intmat=Turnover(intmat, method='r1', sims=100, scores=1, binary=TRUE)
 
-#return results in list form
+#return results as a list
 turnover.intmat
+
 }
 
 

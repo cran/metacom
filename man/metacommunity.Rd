@@ -13,7 +13,7 @@ Analysis of the Elements of Metacommunity Structure
 
 \usage{
 Metacommunity(comm, scores=1, method = "r1", sims = 1000, 
-order=TRUE, allow.empty=FALSE)
+order=TRUE, allow.empty=FALSE, binary=TRUE, progressBar=FALSE)
 }
 
 
@@ -42,18 +42,27 @@ logical argument indicating whether to ordinate the interaction matrix or not. S
 logical argument indicating whether to allow null matrices to have empty rows or columns
 }
 
+ \item{binary}{
+logical argument indicating whether to ordinate the community matrix 
+based on abundance or binary (default) data.
+}
 
+ \item{progressBar}{
+Logical. Prints a graphical progress bar that tracks the creation of null matrices. Useful for conservative null models on large and/or sparse data.
+}
 }
 
 
 \details{
-'method' is an argument handed to functions in the 'vegan' package. Leibold & Mikkelson advocated the use of equiprobable rows and columns (provided that rows and columns had at least one entry). This method is called 'r00'. Methods maintaining row (site) frequencies include 'r0','r1' & 'r2'. The default method argument is 'r1', which maintains the species richness of a site (row totals) and fills species ranges (columns) based on their marginal probabilities. Arguably the most conservative null algorithm is the fixed row - fixed column total null, which is implemented as 'fixedfixed'. See the help file for 'commsimulator' or Wright et al. 1998 for more information. 
+'method' is an argument handed to functions in the 'vegan' package. Leibold & Mikkelson advocated the use of equiprobable rows and columns (provided that rows and columns had at least one entry). This method is called 'r00'. Methods maintaining row (site) frequencies include 'r0','r1' & 'r2'. The default method argument is 'r1', which maintains the species richness of a site (row totals) and fills species ranges (columns) based on their marginal probabilities. Arguably the most conservative null algorithm is the fixed row - fixed column total null, which can be attained using many of swap algorithms described in the vegan package (sequential methods like 'tswap', 'swap', and non-sequential 'quasiswap' and 'backtracking'). See the help file for 'commsim' or Wright et al. 1998 for more information. 
 
 If 'order' is FALSE, the interaction matrix is not ordinated, allowing the user to order the matrix based on site characteristics or other biologically relevant characteristics.
 
 }
 
 \note{This function may take awhile to finish as a result of the creation of null matrices. If you are running multiple interaction matrices, the code can be parallelized using the 'snow' package.}
+
+\note{The progress bar displays for \code{NullMaker} function only. Large matrices for coherence calculations may cause a longer delay in between when the bar is finished and when the function is actually finished running.}
 
 
 \value{
@@ -70,6 +79,8 @@ If 'order' is FALSE, the interaction matrix is not ordinated, allowing the user 
 
 
 \references{
+Dallas,T. 2014. metacom: an R package for the analysis of metacommunity structure. Ecography. DOI:10.1111/j.1600-0587.2013.00695.x
+
 Leibold, M.A. and G.M. Mikkelson. 2002. Coherence, species turnover, and boundary clumping: elements of meta-community structure. Oikos 97: 237 - 250.
 
 Presley, S. J., C. L. Higgins, and M. R. Willig. 2010. A comprehensive framework for the evaluation of metacommunity structure. Oikos 119:908-917
@@ -86,10 +97,10 @@ Tad Dallas
 \examples{
 #define an interaction matrix
 data(TestMatrices)
-lei2b=TestMatrices[[4]]
+intmat=TestMatrices[[7]]
 
 #determines the elements of metacommunity structure 
-ems.intmat=Metacommunity(lei2b, method='r1', sims=1000, scores=1)
+ems.intmat=Metacommunity(intmat, method='r1', sims=100, scores=1)
 
 #return results in list form
 ems.intmat

@@ -1,5 +1,6 @@
-Turnover <-function(comm ,method="r1" ,sims=1000 ,scores=1, order=TRUE, allow.empty=FALSE){
-if(order==TRUE){comm=OrderMatrix(comm,scores=scores)}
+Turnover <-function(comm ,method="r1" ,sims=1000 ,scores=1, order=TRUE, allow.empty=FALSE, binary=TRUE, progressBar=FALSE){
+
+if(order==TRUE){comm=OrderMatrix(comm,scores=scores, binary=binary)}
 
 turnover=function(web){
    	for(i in 1:dim(web)[1]){
@@ -14,17 +15,14 @@ turnover=function(web){
 			temp=web[,j]
 			if(sum(temp) < 2){web[,j]=temp
 			}else{
-			first=min(which(temp==1))
-			last=max(which(temp==1))
-			web[first:last,j]<-1	
+			web[min(which(temp==1)):max(which(temp==1)) , j]<-1	
 			}		
 		}
 	  D <- designdist(web, method = "(A-J)*(B-J)", terms = "minimum")
     return(sum(D))
 }
-
 	statistic=turnover(comm)
-	nulls=NullMaker(comm=comm, sims=sims, method=method,allow.empty=allow.empty)
+	nulls=NullMaker(comm=comm, sims=sims, method=method, allow.empty=allow.empty, progressBar=FALSE)
 	simstat=as.numeric(lapply(nulls,turnover))
 	varstat=sd(simstat)
 	z = (mean(simstat)-statistic)/(varstat)

@@ -9,7 +9,9 @@ Creates null matrices based on the constraints of the null model algorithm ('met
 }
 
 \usage{
-NullMaker(comm, sims = 1000, method = "r1", allow.empty=FALSE)
+NullMaker(comm, sims = 1000, method = "r1", 
+	ordinate=TRUE, scores=1, allow.empty = FALSE, 
+	progressBar=FALSE)
 }
 
 \arguments{
@@ -20,21 +22,34 @@ community data in the form of a presence absence matrix
 number of simulated null matrices to use in analysis
 }
   \item{method}{
-null model randomization method. See details below.
+null model randomization method. See details below. 
+}
+
+	\item{ordinate}{
+logical. Would you like to ordinate the null matrices? Default is TRUE.
+}
+
+  \item{scores}{
+Axis scores to ordinate matrix. 1: primary axis scores (default) 2: secondary axis scores. See Details.
 }
 		\item{allow.empty}{
 logical argument indicating whether to allow null matrices to have empty rows or columns
 }
 
+
+ \item{progressBar}{
+Logical. Prints a graphical progress bar that tracks the creation of null matrices. Useful for conservative null models on large and/or sparse data.
+}
 }
 
 \details{
-'method' is the null model algorithm used to create the null matrices. The choice of a null algorithm is nontrivial. Leibold & Mikkelson advocated the use of equiprobable rows and columns (provided that rows and columns had at least one entry). This method is called 'r00'. Methods maintaining row (site) frequencies include 'r0','r1' & 'r2', whereas species (column) occurrences are preserved with fixed column methods such as 'c0'. The default method argument is 'r1', which maintains the species richness of a site (row totals) and fills species ranges (columns) based on their marginal probabilities. Arguably the most conservative null algorithm is the fixed row - fixed column total null, which is implemented as 'fixedfixed'. There are also sequential swap methods 'tswap', 'swap', and non-sequential 'quasiswap' and 'backtracking' that can be implemented as well. See the help file for 'commsimulator' or Wright et al. 1998 for more information. 
+'method' is the null model algorithm used to create the null matrices. The choice of a null algorithm is nontrivial. Leibold & Mikkelson advocated the use of equiprobable rows and columns (provided that rows and columns had at least one entry). This method is called 'r00'. Methods maintaining row (site) frequencies include 'r0','r1' & 'r2', whereas species (column) occurrences are preserved with fixed column methods such as 'c0'. The default method argument is 'r1', which maintains the species richness of a site (row totals) and fills species ranges (columns) based on their marginal probabilities. Arguably the most conservative null algorithm is the fixed row - fixed column total null, which can be attained using many of swap algorithms described in the vegan package (sequential methods like 'tswap', 'swap', and non-sequential 'quasiswap' and 'backtracking'). Other randomization methods are also available. See the help file for 'commsim', or Wright et al. 1998 for more information. 
 
 }
 
 \value{
-The output is a list of length 'sims' consisting of generated null matrices
+\item{rmats}{
+A list of length(sim) containing the null matrices}
 }
 
 
@@ -43,20 +58,20 @@ J. Oksanen, F.G. Blanchet, R. Kindt, P. Legendre, P.R. Minchin, R.B. O'Hara, G.L
 }
 
 \author{
-Tad Dallas
+Tad Dallas and John Lefcheck
 }
 
 \seealso{
-commsimulator()
+commsimulator(), nullmodel(), permatfull(), commsim()
 }
 
 \examples{
 #define an interaction matrix
 data(TestMatrices)
-intmat=TestMatrices[[4]]
+intmat=TestMatrices[[7]]
 
 #creation of the null matrices
-nulls=NullMaker(intmat, sims=1000,method='r1')
+nulls=NullMaker(intmat, sims=100, method='r1')
 
 #output is a list of length sims with each list element corresponding to a null matrix
 str(nulls)
