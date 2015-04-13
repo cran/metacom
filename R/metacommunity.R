@@ -1,10 +1,10 @@
-Metacommunity = function (comm, scores = 1, method = "r1", sims = 1000, order = TRUE, allow.empty = FALSE, binary = TRUE, progressBar = FALSE){
+Metacommunity = function (comm, scores = 1, method = "r1", sims = 1000, order = TRUE, allow.empty = FALSE, binary = TRUE, verbose = FALSE, modularity=FALSE, c=sum(dim(comm)), nstarts=10){
   if(order == TRUE){
     mat = OrderMatrix(comm, scores = scores, binary = binary)
   }else{
     mat = comm}
 
-  nulls = NullMaker(mat, sims = sims, method = method, allow.empty = allow.empty, progressBar=progressBar)
+  nulls = NullMaker(mat, sims = sims, method = method, allow.empty = allow.empty, verbose=verbose, ordinate=order)
 
   coherence <- function(web) {
     zeros = which(web == 0, arr.ind = TRUE)
@@ -44,7 +44,9 @@ Metacommunity = function (comm, scores = 1, method = "r1", sims = 1000, order = 
     return(dim(ret)[1])
   }
   embabs = coherence(mat)
-  simstat = as.numeric(lapply(nulls, coherence))
+ simstat=unlist(lapply(nulls,coherence))
+	if(length(simstat) < sims){simstat=c(simstat, rep(0, (sims-length(simstat))))}
+
   varstat = sd(simstat)
   z = (mean(simstat) - embabs)/(varstat)
   pval = 2 * pnorm(-abs(z))
@@ -52,8 +54,12 @@ Metacommunity = function (comm, scores = 1, method = "r1", sims = 1000, order = 
                                   varstat, method))
   rownames(coh.out) = c("embedded absences", "z", "pval", "sim.mean", 
                         "sim.sd", "method")
-  boundmat = BoundaryClump(mat, scores = scores, order = order, 
-                           binary = binary)
+  if(modularity==FALSE){
+  boundmat = BoundaryClump(mat, scores = scores, order = FALSE)
+  }else{
+	boundmat = Modularity(mat, method=method, scores = scores, sims=sims, order = FALSE, c=c, nstarts=nstarts)
+	}
+
   turnover = function(web) {
     for (i in 1:dim(web)[1]) {
       temp = web[i, ]
@@ -79,14 +85,17 @@ Metacommunity = function (comm, scores = 1, method = "r1", sims = 1000, order = 
   }
   turn = turnover(mat)
   simstat.t = as.numeric(lapply(nulls, turnover))
-  varstat.t = sd(simstat.t)
-  z.t = (mean(simstat.t) - turn)/(varstat.t)
+  varstat.t = sd(simstat.t, na.rm=TRUE)
+  z.t = (mean(simstat.t, na.rm=TRUE) - turn)/(varstat.t)
   pval.t = 2 * pnorm(-abs(z.t))
   tur = data.frame(output = c(turn, z.t, pval.t, mean(simstat.t), 
                               varstat.t, method))
   rownames(tur) = c("replacements", "z", "pval", "sim.mean", 
                     "sim.sd", "method")
-  ret = list(Comm = mat, Coherence = coh.out, Turnover = tur, 
-             Boundary = boundmat)
+if(modularity==FALSE){ret = list(Comm = mat, Coherence = coh.out, Turnover = tur, 
+             Boundary = boundmat)}
+if(modularity==TRUE){ret = list(Comm = mat, Coherence = coh.out, Turnover = tur, 
+             Modularity = boundmat)}
+
   return(ret)
 }

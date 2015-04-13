@@ -1,48 +1,30 @@
-IdentifyStructure=function(metacom.obj) {
-  #Coherence
-  if(as.numeric(t(metacom.obj$Coherence)[,3]) >= 0.05) "Random" else
-    if(as.numeric(t(metacom.obj$Coherence)[,1]) < as.numeric(t(metacom.obj$Coherence)[,4]) & 
-         as.numeric(t(metacom.obj$Coherence)[,3]) < 0.05) "Checkerboard (negative coherence)" else
-           if(as.numeric(t(metacom.obj$Coherence)[,1]) >= as.numeric(t(metacom.obj$Coherence)[,4]) & 
-                as.numeric(t(metacom.obj$Coherence)[,3]) < 0.05) {
-             print("Positive coherence...")
-             #Significant positive turnover
-             if(as.numeric(t(metacom.obj$Turnover)[,1]) >= as.numeric(t(metacom.obj$Turnover)[,4]) &
-                  as.numeric(t(metacom.obj$Turnover)[,3]) <= 0.05 &
-                  metacom.obj$Boundary[,1] >=0 & metacom.obj$Boundary[,2] < 0.05) "Clementsian" else
-                    if(as.numeric(t(metacom.obj$Turnover)[,1]) >= as.numeric(t(metacom.obj$Turnover)[,4]) &
-                         as.numeric(t(metacom.obj$Turnover)[,3]) <= 0.05 &
-                         metacom.obj$Boundary[,1] < 0 & metacom.obj$Boundary[,2] >= 0.05) "Gleasonian" else
-                           if(as.numeric(t(metacom.obj$Turnover)[,1]) >= as.numeric(t(metacom.obj$Turnover)[,4]) &
-                                as.numeric(t(metacom.obj$Turnover)[,3]) <= 0.05 &
-                                metacom.obj$Boundary[,1] < 0 & metacom.obj$Boundary[,2] < 0.05) "Evenly spaced" else
-                                  #Significant negative turnover
-                                  if(as.numeric(t(metacom.obj$Turnover)[,1]) < as.numeric(t(metacom.obj$Turnover)[,4]) &
-                                       as.numeric(t(metacom.obj$Turnover)[,3]) <= 0.05 &
-                                       metacom.obj$Boundary[,1] >=0 & metacom.obj$Boundary[,2] < 0.05) "Nested (clumped)" else
-                                         if(as.numeric(t(metacom.obj$Turnover)[,1]) < as.numeric(t(metacom.obj$Turnover)[,4]) &
-                                              as.numeric(t(metacom.obj$Turnover)[,3]) <= 0.05 &
-                                              metacom.obj$Boundary[,1] < 0 & metacom.obj$Boundary[,2] >= 0.05) "Nested (random)" else
-                                                if(as.numeric(t(metacom.obj$Turnover)[,1]) < as.numeric(t(metacom.obj$Turnover)[,4]) &
-                                                     as.numeric(t(metacom.obj$Turnover)[,3]) <= 0.05 &
-                                                     metacom.obj$Boundary[,1] < 0 & metacom.obj$Boundary[,2] < 0.05) "Nested (hyperdispersed" else
-                                                       #Non-significant positive turnover
-                                                       if(as.numeric(t(metacom.obj$Turnover)[,1]) >= as.numeric(t(metacom.obj$Turnover)[,4]) &
-                                                            as.numeric(t(metacom.obj$Turnover)[,3]) > 0.05 &
-                                                            metacom.obj$Boundary[,1] >=0 & metacom.obj$Boundary[,2] < 0.05) "Quasi-clementsian" else
-                                                              if(as.numeric(t(metacom.obj$Turnover)[,1]) >= as.numeric(t(metacom.obj$Turnover)[,4]) &
-                                                                   as.numeric(t(metacom.obj$Turnover)[,3]) > 0.05 &
-                                                                   metacom.obj$Boundary[,1] < 0 & metacom.obj$Boundary[,2] >= 0.05) "Quasi-gleasonian" else
-                                                                     if(as.numeric(t(metacom.obj$Turnover)[,1]) >= as.numeric(t(metacom.obj$Turnover)[,4]) &
-                                                                          as.numeric(t(metacom.obj$Turnover)[,3]) > 0.05 &
-                                                                          metacom.obj$Boundary[,1] < 0 & metacom.obj$Boundary[,2] < 0.05) "Quasi-evenly spaced" else
-                                                                            #Non-significant negative turnover
-                                                                            if(as.numeric(t(metacom.obj$Turnover)[,1]) < as.numeric(t(metacom.obj$Turnover)[,4]) &
-                                                                                 as.numeric(t(metacom.obj$Turnover)[,3]) > 0.05 &
-                                                                                 metacom.obj$Boundary[,1] >=0 & metacom.obj$Boundary[,2] < 0.05) "Quasi-nested (clumped)" else
-                                                                                   if(as.numeric(t(metacom.obj$Turnover)[,1]) < as.numeric(t(metacom.obj$Turnover)[,4]) &
-                                                                                        as.numeric(t(metacom.obj$Turnover)[,3]) > 0.05 &
-                                                                                        metacom.obj$Boundary[,1] < 0 & metacom.obj$Boundary[,2] >= 0.05) "Quasi-nested (random)" else
-                                                                                          if(as.numeric(t(metacom.obj$Turnover)[,1]) < as.numeric(t(metacom.obj$Turnover)[,4]) &
-                                                                                               as.numeric(t(metacom.obj$Turnover)[,3]) > 0.05 &
-                                                                                               metacom.obj$Boundary[,1] < 0 & metacom.obj$Boundary[,2] < 0.05) "Quasi-nested (hyperdispersed)" } } 
+IdentifyStructure = function(metacom.obj) {
+  #Random
+		coh=as.numeric(as.character(unlist(metacom.obj$Coherence)[1:5]))
+		turn=as.numeric(as.character(unlist(metacom.obj$Turnover)[1:5]))
+		if(names(metacom.obj)[4] == 'Boundary'){bnd=as.numeric(metacom.obj$Boundary)}
+    if(names(metacom.obj)[4] == 'Modularity'){bnd=as.numeric(metacom.obj$Modularity); bnd=c(bnd[1], bnd[3])}
+
+		if(coh[3] >= 0.05){return("Random")}
+
+	#Checkerboard
+		if(coh[3] < 0.05 & (coh[1] > coh[4])){ return("Checkerboard")}
+		
+  # Nested subsets
+		if(coh[3] < 0.05 & (coh[1] < coh[4]) & (turn[3] < 0.05) & (turn[2] > 0)){ return("Nested Subsets")}
+
+	# Evenly spaced gradient
+	if(coh[3] < 0.05 & (coh[1] < coh[4]) & (turn[3] < 0.05) & (turn[2] < 0) & (bnd[2] <0.05) & (bnd[1] < 1)){ return("Evenly Spaced Gradients")}
+
+  # Gleasonian
+	if(coh[3] < 0.05 & (coh[1] < coh[4]) & (turn[3] < 0.05) & (turn[2] < 0) & (bnd[2] > 0.05)){ return("Gleasonian")}
+
+  # Clementsian
+	if(coh[3] < 0.05 & (coh[1] < coh[4]) & (turn[3] < 0.05) & (turn[2] < 0) & (bnd[2] <0.05) & (bnd[1] > 1)){ return("Clementsian")}
+	
+}
+
+
+
+
+

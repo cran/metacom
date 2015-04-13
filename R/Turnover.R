@@ -1,4 +1,4 @@
-Turnover <-function(comm ,method="r1" ,sims=1000 ,scores=1, order=TRUE, allow.empty=FALSE, binary=TRUE, progressBar=FALSE){
+Turnover <-function(comm ,method="r1" ,sims=1000 ,scores=1, order=TRUE, allow.empty=FALSE, binary=TRUE, verbose=FALSE){
 
 if(order==TRUE){comm=OrderMatrix(comm,scores=scores, binary=binary)}
 
@@ -22,10 +22,10 @@ turnover=function(web){
     return(sum(D))
 }
 	statistic=turnover(comm)
-	nulls=NullMaker(comm=comm, sims=sims, method=method, allow.empty=allow.empty, progressBar=FALSE)
+	nulls=NullMaker(comm=comm, sims=sims, method=method, allow.empty=allow.empty, verbose=verbose)
 	simstat=as.numeric(lapply(nulls,turnover))
-	varstat=sd(simstat)
-	z = (mean(simstat)-statistic)/(varstat)
+	varstat=sd(simstat, na.rm=TRUE)
+	z = (mean(simstat, na.rm=TRUE)-statistic)/(varstat)
 	pval=2*pnorm(-abs(z))
 	return(list(Turnover=statistic, z=z,pval=pval,SimulatedMean=mean(simstat),SimulatedVariance=varstat,Method=method))
 	

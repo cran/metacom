@@ -1,55 +1,41 @@
-\name{Turnover}
-\alias{Turnover}
+\name{Modularity}
+\alias{Modularity}
 
 \title{
-Determines Species Turnover
+Calculates Barber's Bipartite Modularity
 }
 
 \description{
-\code{Turnover} is a function that assesses species turnover from the range perspective (traditional method). 
+Modularity, community formation, boundary clumping. Call it what you want, there is a fair amount of overlap in definition here. As such, we posit that modularity statistics may be able to detect boundary clumping better than Morisita's index. We offer a function here to calculate modularity. Specifically, this function calculates Barber's Q statistic, and compares it relative to null model randomizations. 
 
-If the "community" perspective is desired, simply transpose the matrix before analysis using the transpose function (\code{t()}), but make sure you understand the implications of this action, as the interpretation of the output changes dramatically.
+
 }
-
 
 \usage{
-Turnover(comm, method = "r1", sims = 1000, scores = 1, 
-order=TRUE, allow.empty=FALSE, binary=TRUE, verbose=FALSE)
+Modularity(comm, method="tswap", sims=1000, 
+  scores=1, order=TRUE,  c=sum(dim(comm)), nstarts=100)
 }
-
 
 \arguments{
   \item{comm}{
 community data in the form of a presence absence matrix
 }
-
   \item{method}{
 null model randomization method used by \code{NullMaker}. See details below (and the help file of fucntion \code{NullMaker}) for more information. 
 }
-
   \item{sims}{
 number of simulated null matrices to use in analysis
 }
-
   \item{scores}{
 axis scores to ordinate matrix. 1: primary axis scores (default) 2: secondary axis scores
 }
-
 		\item{order}{
 logical argument indicating whether to ordinate the interaction matrix or not. See details.
 }
+	\item{c}{starting guess for the number of modules present. Defaults to the maximum number of modules possible.}
+	
+	\item{nstarts}{number of starts. Default is 100. More will both slow the function down, and increase the likelihood of converging on the true modularity value.}
 
-		\item{allow.empty}{
-logical argument indicating whether to allow null matrices to have empty rows or columns
-}
-
- \item{binary}{
-logical argument indicating whether to ordinate the community matrix based on abundance or binary (default) data.
-}
-
- \item{verbose}{
-Logical. Prints a graphical progress bar that tracks the creation of null matrices. Useful for conservative null models on large and/or sparse data.
-}
 
 }
 
@@ -59,29 +45,24 @@ Logical. Prints a graphical progress bar that tracks the creation of null matric
 
 If \code{order} is FALSE, the interaction matrix is not ordinated, allowing the user to order the matrix based on site characteristics or other biologically relevant characteristics.
 
-This function can either be used as a standalone, or can be used through the 'Metacommunity()' function, which determines all 3 elements of metacommunity structure (coherence, boundary clumping, & turnover) (Leibold & Mikkelson 2002)
 }
 
 
-
 \value{
-\item{turnover}{species turnover, quantified as the number of replacements across species ranges}
+\item{Q}{Barber's modularity statistic}
+  
+\item{z}{the z statistic comparing observed modularity against null matrices}
 
-\item{z}{the z statistic comparing observed turnover against species turnover of null matrices}
+\item{pval}{p-value from null model analysis of modularity}
 
-\item{pval}{p-value from a z-test to assess significance of species turnover relative to null matrices}
-
-\item{simulated mean}{mean number of replacements in simulated null matrices}
-
-\item{simulated variance}{variance in the number of replacements of simulated null matrices}
-
-\item{method}{randomization method to create null matrices}
-
-
+\item{SimulatedMean}{mean modularity value from simulated null matrices}
 }
 
 
 \references{
+
+Barber, M. J. 2007. Modularity and community detection in bipartite networks. Physical Review E, 76(6), 066102.
+
 Leibold, M.A. and G.M. Mikkelson. 2002. Coherence, species turnover, and boundary clumping: elements of meta-community structure. Oikos 97: 237 - 250.
 
 Wright, D.H., Patterson, B.D., Mikkelson, G.M., Cutler, A. & Atmar, W. (1998). A comparative analysis of nested subset patterns of species composition. Oecologia 113, 1-20.
@@ -89,24 +70,20 @@ Wright, D.H., Patterson, B.D., Mikkelson, G.M., Cutler, A. & Atmar, W. (1998). A
 
 
 \author{
-Tad Dallas
+Tomlin Pulliam and Tad Dallas
 }
-
-
 
 \examples{
 #define an interaction matrix
 data(TestMatrices)
 intmat=TestMatrices[[3]]
 
-#determine species turnover
-turnover.intmat=Turnover(intmat, method='r1', sims=100, scores=1, binary=TRUE)
+#determine Barber"s modularity 
+mod.intmat=Modularity(intmat, method="r1", sims=5, 
+ scores=1, order=TRUE, nstarts=10)
 
-#return results as a list
-turnover.intmat
-
+#return results 
+mod.intmat
 }
-
-
 
 

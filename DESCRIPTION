@@ -1,17 +1,16 @@
 Package: metacom
 Type: Package
-Title: Analysis of the 'Elements of Metacommunity Structure'
-Version: 1.4.2
-Date: 2014-12-9
-Author: person("Tad", "Dallas", role = c("aut", "cre"),
-    email = "tdallas@uga.edu")
+Title: Analysis of the "Elements of Metacommunity Structure"
+Version: 1.4.3
+Date: 2015-4-13
+Author: Tad Dallas
 Imports: devtools, vegan, lattice
 Maintainer: Tad Dallas <tdallas@uga.edu>
-Description: Functions to analyze coherence, boundary clumping, and turnover following the pattern-based metacommunity analysis of Leibold and Mikkelson 2002 
+Description: Functions to analyze coherence, boundary clumping, and turnover following the pattern-based metacommunity analysis of Leibold and Mikkelson 2002. The package also includes functions to visualize ecological networks, and to calculate modularity as a replacement to boundary clumping. 
 LazyLoad: yes
 LazyData: yes
 License: GPL-2
-Packaged: 2014-12-09 22:55:19 UTC; drakelab
+Packaged: 2015-04-13 13:37:15 UTC; drakelab
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2014-12-11 07:39:58
+Date/Publication: 2015-04-13 16:40:07

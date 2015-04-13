@@ -2,10 +2,11 @@
 \alias{OrderMatrix}
 
 \title{
-Ordinates interaction matrix
+Ordinates Interaction Matrix
 }
+
 \description{
-'OrderMatrix' ordinates an interaction matrix scores derived from reciprocal averaging (Gauch et al. 1977). These scores represent a latent environmental gradient along which species distributions are structured.   
+\code{OrderMatrix} ordinates an interaction matrix scores derived from reciprocal averaging (Gauch et al. 1977). These scores represent a latent environmental gradient along which species distributions are structured.   
 }
 
 
@@ -37,7 +38,7 @@ logical argument indicating whether to ordinate the community matrix based on ab
 
 
 \value{
-'OrderMatrix' returns either an ordinated matrix (output.scores = FALSE) or the site and species scores (output.scores = TRUE) obtained from reciprocal averaging. This function is already contained within functions calculating coherence, species turnover & boundary clumping, but may be useful for visualizations or for hypothesis testing concerning the important variables associated with the site or species scores.  
+\code{OrderMatrix} returns either an ordinated matrix (\code{output.scores = FALSE}) or the site and species scores (\code{output.scores = TRUE}) obtained from reciprocal averaging. This function is already contained within functions calculating coherence, species turnover & boundary clumping, but may be useful for visualizations or for hypothesis testing concerning the important variables associated with the site or species scores.  
 }
 
 
@@ -56,7 +57,7 @@ Tad Dallas
 }
 
 \note{
-'OrderMatrix', like many of these functions, relies heavily on the 'vegan' package.
+\code{OrderMatrix}, like many of these functions, relies heavily on the \code{vegan} package.
 }
 
 
@@ -64,7 +65,7 @@ Tad Dallas
 \examples{
 #define an interaction matrix
 data(TestMatrices)
-pres3c=TestMatrices[[6]]
+pres3c=TestMatrices[[4]]
 
 #obtain an ordinated interaction matrix
 OrderMatrix(pres3c, scores = 1, output.scores = FALSE)

@@ -2,12 +2,12 @@
 \alias{TestMatrices}
 \docType{data}
 \title{
-Test matrices used to evaluate metacommunity functions
+Interaction Matrices Used to Test Package Functions
 }
 
 
 \description{
-A list of 7 test matrices from two of the foundational papers on the Elements of Metacommunity Structure analysis (Leibold & Mikkelson 2002 and Presley et al. 2010)
+A list of 5 interaction matrices for demonstration.
 }
 
 
@@ -15,21 +15,18 @@ A list of 7 test matrices from two of the foundational papers on the Elements of
 
 
 \format{
-A list containing interaction matrices from Leibold & Mikkelson 2002 and Presley et al. 2010:
+A list containing artificial interaction matrices for test purposes
 
-	[[1]]  dim=(20 x 20) Randomly generated matrix (`rbinom(400,1,0.4)`)
+	[[1]]  \code{dim=(20 x 20)} Randomly generated matrix (\code{rbinom(400,1,0.4)})
 
-	[[2]]  dim=(10 x 10) Leibold & Mikkelson 2002 Figure 1b
+	[[2]]  \code{dim=(20 x 20)} Checkerboard matrix
 
-	[[3]]  dim=(10 x 10) Leibold & Mikkelson 2002 Figure 2a
+	[[3]]  \code{dim=(20 x 20)} Nested subset matrix
 
-	[[4]]  dim=(10 x 10) Leibold & Mikkelson 2002 Figure 2b
+	[[4]]  \code{dim=(15 x 10)} Clementsian matrix
 
-	[[5]]  dim=(15 x 10) Leibold & Mikkelson 2002 Figure 3c
+	[[5]]  \code{dim=(20 x 20)} Gleasonian matrix
 
-	[[6]]  dim=(20 x 20) Presley et al. Figure 3c
-
-	[[7]]  dim(20 x 20) Presley et al. Figure 4a
 }
 
 
@@ -46,12 +43,7 @@ Presley, S. J., C. L. Higgins, and M. R. Willig. 2010. A comprehensive framework
 #load list containing interaction matrices
 data(TestMatrices)
 
-length(TestMatrices)
-names(TestMatrices)
-
-#image plot of interaction matrix, using the Imagine() function
-test=TestMatrices[[6]]
-Imagine(test, fill=FALSE, ordinate=TRUE)
+str(TestMatrices)
 
 }
 

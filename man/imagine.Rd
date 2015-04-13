@@ -2,7 +2,7 @@
 \alias{Imagine}
 
 \title{
-Plotting of site-by-species interaction matrices
+Produces Interaction Matrix Plot
 }
 \description{
 'Imagine' produces an image plot, grid of small rectangles representing species occurrences in sites, of a given interaction matrix.
@@ -82,10 +82,10 @@ Tad Dallas
 \examples{
 #define an interaction matrix
 data(TestMatrices)
-pres3c=TestMatrices[[6]]
+intMat=TestMatrices[[4]]
 
 #plot interaction matrix
-Imagine(pres3c, col=c('white','blue'), ordinate=TRUE, fill=FALSE)
+Imagine(intMat, col=c('white','dodgerblue'), ordinate=TRUE, fill=FALSE)
 
 }
 

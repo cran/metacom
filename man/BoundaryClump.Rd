@@ -3,16 +3,18 @@
 
 
 \title{
-Determines boundary clumping 
+Determines Boundary Clumping 
 }
 
 
 \description{
-'BoundaryClump' calculates the Morisita's Index (Morisita 1962) for presence-absence interaction matrices, using a chi-squared test to assess significance.
+\code{BoundaryClump} calculates the Morisita's Index (Morisita 1962) for presence-absence interaction matrices, using a chi-squared test to assess significance.
 
 This statistic is not based on randomization methods, so the function only requires a presence-absence interaction matrix and two arguments regarding the ordination of the empirical matrix.
 
-The default is the range perspective, meaning that the analyses of boundary clumping and species turnover compare the distribution of species among sites. If the 'community' perspective is desired, transpose the matrix before analysis using the transpose function ('t()'). However, the author cautions against misinterpretation of the community perspective, as the biological meaning of turnover and boundary clumping differ between perspectives. 
+The default is the range perspective, meaning that the analyses of boundary clumping and species turnover compare the distribution of species among sites. If the "community" perspective is desired, transpose the matrix before analysis using the transpose function (\code{t()}). However, the author cautions against misinterpretation of the community perspective, as the biological meaning of turnover and boundary clumping differ between perspectives. 
+
+Lastly, there is conceptual overlap between the study of community formation and the clumping of species range boundaries. This creates two different ways to assess the same aspect of an interaction matrix; either through calculation of Morisita's index (\code{BoundaryClump}) or modularity (\code{Modularity}). 
 
 }
 
@@ -41,14 +43,14 @@ logical argument indicating whether to ordinate the community matrix based on ab
 }
 
 
-\details{Boundary clumping, quantified by the Morisita's index, is a measure of the degree to which species range boundaries overlap. This measure, and species turnover, cannot be interpreted unless the network is significantly coherent (see 'Coherence()'). 
+\details{Boundary clumping, quantified by the Morisita's index, is a measure of the degree to which species range boundaries overlap. This measure, and species turnover, cannot be interpreted unless the network is significantly coherent (see \code{Coherence()}). 
 
-If 'order' is FALSE, the interaction matrix is not ordinated, allowing the user to order the matrix based on site characteristics or other biologically relevant characteristics.
+If \code{order} is FALSE, the interaction matrix is not ordinated, allowing the user to order the matrix based on site characteristics or other biologically relevant characteristics.
 }
 
 
 \value{
-'BoundaryClump' returns a data frame containing the calculated Morisita's index ('index'), the corresponding p-value ('P'), and the degrees of freedom ('df'). 
+\code{BoundaryClump} returns a data frame containing the calculated Morisita's index (\code{index}), the corresponding p-value (\code{P}), and the degrees of freedom (\code{df}). 
 
 The p-value is based on a chi-squared test comparing the Morisita's index to a value of 1. If the Morisita's index is less than 1, a left-tailed test is performed (less clumping than expected by chance).
  
@@ -69,7 +71,7 @@ Tad Dallas
 
 ## define an interaction matrix
 data(TestMatrices)
-intmat=TestMatrices[[1]]
+intmat=TestMatrices[[4]]
 
 ## analysis of boundary clumping
 bound.test=BoundaryClump(intmat, order=TRUE, scores=1, binary=TRUE)

@@ -2,15 +2,15 @@
 \alias{Coherence}
 
 \title{
-Determines coherence
+Calculates Coherence of Interaction Matrix
 }
 \description{
-This function determines the number of embedded absences in an interaction matrix, and compares this value against null simulated matrices. Species ranges should be coherent along the ordination axis, as this axis represents a latent environmental gradient. A negative value of coherence (empirical matrix has more embedded absences than null matrices) indicates a 'checkerboard' pattern (Leibold & Mikkelson 2002). Nonsignificance has been historically interpreted as being indicative of a 'random' pattern, though this may be seen as accepting the null hypothesis, as nonsignificance cannot be used to infer a process.
+This function determines the number of embedded absences in an interaction matrix, and compares this value against null simulated matrices. Species ranges should be coherent along the ordination axis, as this axis represents a latent environmental gradient. A negative value of coherence (empirical matrix has more embedded absences than null matrices) indicates a "checkerboard" pattern (Leibold & Mikkelson 2002). Non-significance has been historically interpreted as being indicative of a "random" pattern, though this may be seen as accepting the null hypothesis, as non-significance cannot be used to infer a process.
 }
 
 \usage{
 Coherence(comm, method = "r1", sims = 1000, scores = 1, 
-order=TRUE, allow.empty=FALSE, binary=TRUE, progressBar=FALSE)
+  order=TRUE, allow.empty=FALSE, binary=TRUE, verbose=FALSE)
 }
 
 \arguments{
@@ -18,7 +18,7 @@ order=TRUE, allow.empty=FALSE, binary=TRUE, progressBar=FALSE)
 community data in the form of a presence absence matrix
 }
   \item{method}{
-null model randomization method used by 'nullmaker'. See details below (and the help file of fucntion 'nullmaker') for more information. 
+null model randomization method used by \code{NullMaker}. See details below (and the help file of fucntion \code{NullMaker}) for more information. 
 }
   \item{sims}{
 number of simulated null matrices to use in analysis
@@ -39,7 +39,7 @@ logical argument indicating whether to allow null matrices to have empty rows or
 logical argument indicating whether to ordinate the community matrix based on abundance or binary (default) data.
 }
 
- \item{progressBar}{
+ \item{verbose}{
 Logical. Prints a graphical progress bar that tracks the creation of null matrices. Useful for conservative null models on large and/or sparse data.
 }
 
@@ -47,24 +47,24 @@ Logical. Prints a graphical progress bar that tracks the creation of null matric
 
 
 \details{
-'method' is an argument handed to functions in the 'vegan' package. Leibold & Mikkelson advocated the use of equiprobable rows and columns (provided that rows and columns had at least one entry). This method is called 'r00'. Methods maintaining row (site) frequencies include 'r0','r1' & 'r2'. The default method argument is 'r1', which maintains the species richness of a site (row totals) and fills species ranges (columns) based on their marginal probabilities. Arguably the most conservative null algorithm is the fixed row - fixed column total null, which is implemented as 'fixedfixed'. See the help file for 'commsimulator' or Wright et al. 1998 for more information. 
+\code{method} is an argument handed to functions in the \code{vegan} package. Leibold & Mikkelson advocated the use of equiprobable rows and columns (provided that rows and columns had at least one entry). This method is called \code{r00}. Methods maintaining row (site) frequencies include \code{r0},\code{r1}, and \code{r2}. The default method argument is \code{r1}, which maintains the species richness of a site (row totals) and fills species ranges (columns) based on their marginal probabilities. Arguably the most conservative null algorithm is the fixed row - fixed column total null, which can be attained using many of swap algorithms described in the vegan package (sequential methods like \code{tswap}, \code{swap}, and non-sequential \code{quasiswap} and \code{backtracking}). See the help file for \code{commsim} or Wright et al. 1998 for more information. 
 
-If 'order' is FALSE, the interaction matrix is not ordinated, allowing the user to order the matrix based on site characteristics or other biologically relevant characteristics.
+If \code{order} is FALSE, the interaction matrix is not ordinated, allowing the user to order the matrix based on site characteristics or other biologically relevant characteristics.
 
-This function can either be used as a standalone, or can be used through the 'metacommunity()' function, which determines all 3 elements of metacommunity structure (coherence, boundary clumping, & turnover) (Leibold & Mikkelson 2002)
+This function can either be used as a standalone, or can be used through the \code{Metacommunity()} function, which determines all 3 elements of metacommunity structure (coherence, boundary clumping, & turnover) (Leibold & Mikkelson 2002)
 }
 
 
 \value{
-\item{Coherence}{the number of embedded absences within the interaction matrix}
+\item{EmbAbs}{the number of embedded absences within the interaction matrix}
   
-\item{z}{the z statistic comparing observed turnover against species turnover of null matrices}
+\item{z}{the z statistic comparing observed coherence against null matrices}
 
-\item{pval}{p-value from a z-test to assess significance of species turnover relative to null matrices}
+\item{pval}{p-value from a z-test to assess significance of coherence relative to null matrices}
 
-\item{simulated mean}{mean number of replacements in simulated null matrices}
+\item{SimulatedMean}{mean number of embedded absences in simulated null matrices}
 
-\item{simulated variance}{variance in the number of replacements of simulated null matrices}
+\item{SimulatedVariance}{variance in the number of embedded absences of simulated null matrices}
 
 \item{method}{randomization method to create null matrices}
 }
@@ -84,7 +84,7 @@ Tad Dallas
 \examples{
 #define an interaction matrix
 data(TestMatrices)
-intmat=TestMatrices[[7]]
+intmat=TestMatrices[[3]]
 
 #determine coherence of interaction matrix
 coh.intmat=Coherence(intmat, method='r1', sims=100, scores=1, order=TRUE, binary=TRUE)

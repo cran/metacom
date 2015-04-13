@@ -2,11 +2,11 @@
 \alias{IdentifyStructure}
 
 \title{
-Classifies metacommunities
+Classifies Metacommunities
 }
 
 \description{
-Identifies structure (or quasi-structure) and outputs a classification.   
+Identifies structure and outputs a classification. Currently only supports the 7 original metacommunity structures, and ignores the quasi-structures. 
 }
 
 
@@ -21,7 +21,7 @@ IdentifyStructure(metacom.obj)
 \arguments{
  
  \item{metacom.obj}{
-The result of the `Metacommunity` function, containing a list of 4 elements; the empirical matrix being tested, and results for coherence, turnover, and boundary clumping.
+The result of the \code{Metacommunity} function, containing a list of 4 elements; the empirical matrix being tested, and results for coherence, turnover, and boundary clumping.
 }
 
 }
@@ -29,31 +29,27 @@ The result of the `Metacommunity` function, containing a list of 4 elements; the
 
 
 \value{
-Ouputs a classification of the metacommunity. 
+Returns the metacommunity classification based on the three EMS statistics. 
 }
 
 
 \author{
-John Lefcheck
+Jon Lefcheck & Tad Dallas
 }
 
 \note{
-Quasi structures, as well as 'random' and 'Gleasonian' structures, may not strictly be discernable through the EMS approach, as they rely on inferring a result from a non-significant test ('accepting the null'), which is typically a bad idea.
+Quasi structures, as well as "random" and "Gleasonian" structures, may not strictly be discernable through the EMS approach, as they rely on inferring a result from a non-significant test ("accepting the null"), which is typically a bad idea. As such, we exclude the classification of quasi-structures in this function. Also, we encourage you to examine the \code{metacom.object} thoroughly, and not to rely on this function for classification. 
 }
 
 
 
 \examples{
-# Define an interaction matrix
+# Define interaction matrices
 data(TestMatrices)
-pres3c=TestMatrices[[6]]
 
-# Analyze metacommunity
-pres3c.metacom=Metacommunity(pres3c, sims=10, method='r1')
-
-# Identify the structure
-IdentifyStructure(pres3c.metacom)
-
+# Analyze metacommunity & Identify the structure
+IDmetacom = IdentifyStructure(Metacommunity(TestMatrices[[3]], 
+   sims=100, method="r1", order=TRUE, allow.empty=FALSE))
 }
 
 

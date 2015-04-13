@@ -1,6 +1,6 @@
 BoundaryClump <-function(comm, order=TRUE, scores=1, binary=TRUE){
 	if(order==TRUE){comm=OrderMatrix(comm, scores=scores, binary=binary)}
-
+	
 	for(i in 1:dim(comm)[1]){
 			temp=comm[i,]
 			comm[i,min(which(temp==1)):max(which(temp==1))]<-1	
@@ -32,6 +32,6 @@ BoundaryClump <-function(comm, order=TRUE, scores=1, binary=TRUE){
 	}else{ 
 	Mpr=1-pchisq(ComBndChi,df)
 	}
-  return(data.frame(index=M,P=Mpr,df=df))
+  return(data.frame(index = M, P = Mpr, df = df))
 }
 
