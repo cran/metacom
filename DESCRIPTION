@@ -1,8 +1,8 @@
 Package: metacom
 Type: Package
 Title: Analysis of the 'Elements of Metacommunity Structure'
-Version: 1.4.4
-Date: 2016-4-11
+Version: 1.4.5
+Date: 2017-2-24
 Author: Tad Dallas
 Depends: vegan (>= 2.2-1)
 Suggests: testthat
@@ -15,9 +15,9 @@ LazyLoad: yes
 LazyData: yes
 License: GPL-2
 BugReports: https://github.com/taddallas/metacom/issues
-URL: https://github.com/taddallas/metacom
+URL: https://cran.r-project.org/package=metacom
 RoxygenNote: 5.0.1
 NeedsCompilation: no
-Packaged: 2016-04-13 16:12:59 UTC; drakelab
+Packaged: 2017-02-25 05:43:50 UTC; tad
 Repository: CRAN
-Date/Publication: 2016-04-13 21:35:15
+Date/Publication: 2017-02-25 14:16:35
