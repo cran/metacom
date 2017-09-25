@@ -54,21 +54,25 @@
 #'
 #' data(TestMatrices)
 #' intmat <- TestMatrices[[1]]
-#' bound.test <- BoundaryClump(intmat, order=TRUE, scores=1, binary=TRUE)
+#' bound.test <- BoundaryClump(intmat, order=TRUE, scores=1, 
+#'	binary=TRUE, fill=TRUE)
 #' bound.test
+
 
 BoundaryClump <-function(comm, order=TRUE, scores=1, 
 	binary=TRUE, fill=TRUE){
-	if(order==TRUE){comm <- OrderMatrix(comm, scores=scores)}
+	if(order==TRUE){
+		comm <- OrderMatrix(comm, scores=scores)
+	}
 	if(fill){
 		for (i in 1:ncol(comm)) {
 			comm[min(which(comm[, i] == 1)):max(which(comm[, i] == 1)), i] <- 1
 		}
 	}
+	comm <- t(comm)
 	M <- 0
 	ComBnd <- rep(0, ncol(comm))
 	ComBndChi <- 0
-
 	for(i in 1:nrow(comm)){
 		ind1 <- which(comm[i,]==1)
 		for(j in 1:ncol(comm)){
@@ -85,10 +89,11 @@ BoundaryClump <-function(comm, order=TRUE, scores=1,
      df <- df + 1
   }
   M <- M * (ncol(comm) - 2)
-	if(M<1){
-		Mpr=pchisq(ComBndChi,df)
+	if(M < 1){
+		Mpr <- pchisq(ComBndChi,df)
 	}else{ 
-		Mpr <- 1-pchisq(ComBndChi,df)
+		Mpr <- 1 - pchisq(ComBndChi,df)
 	}
   return(data.frame(index=M,P=Mpr,df=df))
 }
+
