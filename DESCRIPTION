@@ -1,7 +1,7 @@
 Package: metacom
 Type: Package
 Title: Analysis of the 'Elements of Metacommunity Structure'
-Version: 1.4.9
+Version: 1.5.0
 Author: Tad Dallas
 Depends: vegan (>= 2.2-1)
 Suggests: testthat
@@ -18,6 +18,6 @@ BugReports: https://github.com/taddallas/metacom/issues
 URL: https://cran.r-project.org/package=metacom
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-09-25 20:49:10 UTC; tdallas
+Packaged: 2018-01-19 22:55:26 UTC; tdallas
 Repository: CRAN
-Date/Publication: 2017-09-25 22:10:27 UTC
+Date/Publication: 2018-01-20 15:43:46 UTC

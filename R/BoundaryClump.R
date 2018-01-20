@@ -94,6 +94,7 @@ BoundaryClump <-function(comm, order=TRUE, scores=1,
 	}else{ 
 		Mpr <- 1 - pchisq(ComBndChi,df)
 	}
-  return(data.frame(index=M,P=Mpr,df=df))
+	return(data.frame(name=c('index', 'p', 'df'),
+		stat=c(M, Mpr, df))) 
 }
 
