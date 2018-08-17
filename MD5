@@ -1,10 +1,10 @@
-02b0efadb39fdfba9c8f531cade0b334 *DESCRIPTION
+97dbce449ee2aea7a3c37d6f893db409 *DESCRIPTION
 bab538daf720b6502aeedec65ab6d83c *NAMESPACE
-09a2c0706dce15c283de74e936bd74dc *NEWS.md
+3b0bae05c5cf98213ba803ba41bf388b *NEWS.md
 b12da3a7519c12e3b934a94ca72bed92 *R/BoundaryClump.R
 39e29ee86057d333f17eb9a42b8bf61e *R/Coherence.R
 05dbd8d49794eca7524bff7f9d233f1f *R/Imagine.R
-ace1e65d90b7184cc7a23b0b0a3ead02 *R/Metacommunity.R
+737bf506a7d86980eebda4a74b056856 *R/Metacommunity.R
 cd4f9bf960c60edd15a73464a76cb3f0 *R/Modularity.R
 e30be0211be1d679ace4a1e5405fcde5 *R/NullMaker.R
 6d94f033691f3526e219966de5dd9634 *R/OrderMatrix.R
