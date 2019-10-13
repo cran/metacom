@@ -92,7 +92,7 @@ Turnover = function (comm, method = "EMS", sims = 1000,
 	if(method != 'EMS'){
 		nulls <- NullMaker(comm = comm, sims = sims, 
 				method = method, allowEmpty = allowEmpty, 
-				verbose = verbose, ordinate = FALSE, seed=seed)
+				verbose = verbose, ordinate = order, seed=seed)
 	}
 
 	if(method=='EMS'){
@@ -113,7 +113,7 @@ Turnover = function (comm, method = "EMS", sims = 1000,
 
   simstat <- as.numeric(lapply(nulls, turnover))
   varstat <- sd(simstat)
-  z <- (mean(simstat) - statistic)/(varstat)
+  z <- (statistic-mean(simstat))/(varstat)
   pval <- 2 * pnorm(-abs(z))
 	meth <- paste('method =', method)	
 	return(data.frame(name=c('turnover', 'z', 'p', 

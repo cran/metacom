@@ -1,7 +1,7 @@
 Package: metacom
 Type: Package
 Title: Analysis of the 'Elements of Metacommunity Structure'
-Version: 1.5.1
+Version: 1.5.2
 Authors@R: c(
     person("Tad", "Dallas", email = "tad.a.dallas@gmail.com", role = c("aut","cre")),
     person("Tom", "Pulliam", email = "tomlinp@gmail.com", role = "ctb"))
@@ -18,10 +18,10 @@ LazyData: yes
 License: GPL-2
 BugReports: https://github.com/taddallas/metacom/issues
 URL: https://cran.r-project.org/package=metacom
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 NeedsCompilation: no
-Packaged: 2018-08-17 12:53:54 UTC; tad
+Packaged: 2019-10-13 02:35:38 UTC; tad
 Author: Tad Dallas [aut, cre],
   Tom Pulliam [ctb]
 Repository: CRAN
-Date/Publication: 2018-08-17 23:00:06 UTC
+Date/Publication: 2019-10-13 04:20:02 UTC
